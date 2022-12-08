@@ -17,13 +17,13 @@ void EmptyLinkFunctionForGeneratedCodeGodOfWar_Axe_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x85E40161,
-				0xDFC90606,
+				0x5745B3A6,
+				0xA01FA8BD,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_GodOfWar_Axe.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_GodOfWar_Axe.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_GodOfWar_Axe(Z_Construct_UPackage__Script_GodOfWar_Axe, TEXT("/Script/GodOfWar_Axe"), Z_Registration_Info_UPackage__Script_GodOfWar_Axe, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x85E40161, 0xDFC90606));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_GodOfWar_Axe(Z_Construct_UPackage__Script_GodOfWar_Axe, TEXT("/Script/GodOfWar_Axe"), Z_Registration_Info_UPackage__Script_GodOfWar_Axe, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x5745B3A6, 0xA01FA8BD));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

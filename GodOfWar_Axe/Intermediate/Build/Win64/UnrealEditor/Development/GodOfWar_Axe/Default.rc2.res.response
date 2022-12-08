@@ -67,7 +67,9 @@
 /DBUILT_FROM_CHANGELIST=23058290
 /DBUILD_VERSION=++UE5+Release-5.1-CL-23058290
 /DBUILD_ICON_FILE_NAME="\"..\\Build\\Windows\\Resources\\Default.ico\""
-/DPROJECT_COPYRIGHT_STRING="Fill out your copyright notice in the Description page of Project Settings."
+/DPROJECT_COMPANY_NAME="Eric G. Navarro"
+/DPROJECT_COPYRIGHT_STRING="Created by Eric G. Navarro"
+/DPROJECT_PRODUCT_NAME=GodOfWar_Axe
 /DPROJECT_PRODUCT_IDENTIFIER=GodOfWar_Axe
 /fo "C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Intermediate\Build\Win64\UnrealEditor\Development\GodOfWar_Axe\Default.rc2.res"
 "..\Build\Windows\Resources\Default.rc2"

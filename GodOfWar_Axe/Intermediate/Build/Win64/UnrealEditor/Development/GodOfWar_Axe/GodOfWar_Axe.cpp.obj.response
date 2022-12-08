@@ -1,18 +1,16 @@
 C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Source\GodOfWar_Axe\GodOfWar_Axe.cpp
 /I .
-/I C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Intermediate\Build\Win64\UnrealEditor\Inc\GodOfWar_Axe\UHT
-/I C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Source
-/I Runtime
-/I Runtime\TraceLog\Public
-/I Runtime\Core\Public
-/I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\UHT
-/I Runtime\CoreUObject\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\UHT
+/I Runtime
 /I ..\Shaders\Shared
 /I Runtime\Engine\Classes
 /I Runtime\Engine\Public
+/I Runtime\TraceLog\Public
+/I Runtime\Core\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreOnline\UHT
 /I Runtime\CoreOnline\Public
+/I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject\UHT
+/I Runtime\CoreUObject\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\NetCore\UHT
 /I Runtime\Net
 /I Runtime\Net\Core\Classes
@@ -271,6 +269,8 @@ C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Source\GodOf
 /I Runtime\MovieSceneCapture\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController\UHT
 /I Developer\AnimationDataController\Public
+/I C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Intermediate\Build\Win64\UnrealEditor\Inc\GodOfWar_Axe\UHT
+/I C:\Users\ericg\OneDrive\Documentos\GitHub\GodOfWar_Axe\GodOfWar_Axe\Source
 /external:W0
 /external:I ThirdParty\mimalloc\include
 /external:I ThirdParty\LibTiff\Source\Win64
