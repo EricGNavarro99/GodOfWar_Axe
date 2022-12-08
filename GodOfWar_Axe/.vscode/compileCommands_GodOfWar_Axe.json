@@ -1,0 +1,42 @@
+[
+	{
+		"file": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe\\GodOfWar_Axe.Build.cs",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\.vscode\\compileCommands_GodOfWar_Axe\\GodOfWar_Axe.253.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe\\GodOfWar_Axe.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\.vscode\\compileCommands_GodOfWar_Axe\\GodOfWar_Axe.253.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe\\GodOfWar_Axe.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\.vscode\\compileCommands_GodOfWar_Axe\\GodOfWar_Axe.253.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe\\GodOfWar_AxeGameModeBase.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\.vscode\\compileCommands_GodOfWar_Axe\\GodOfWar_Axe.253.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe\\GodOfWar_AxeGameModeBase.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\.vscode\\compileCommands_GodOfWar_Axe\\GodOfWar_Axe.253.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	}
+]

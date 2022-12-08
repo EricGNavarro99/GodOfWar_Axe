@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "GodOfWar_Axe",
+			"Path": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "GodOfWar_AxeEditor",
+			"Path": "C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_AxeEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe\\GodOfWar_Axe.Build.cs",
+		"C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_Axe.Target.cs",
+		"C:\\Users\\ericg\\OneDrive\\Documentos\\GitHub\\GodOfWar_Axe\\GodOfWar_Axe\\Source\\GodOfWar_AxeEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.0"
+}
