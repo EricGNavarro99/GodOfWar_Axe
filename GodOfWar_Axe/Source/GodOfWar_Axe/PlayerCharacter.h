@@ -14,11 +14,25 @@ class GODOFWAR_AXE_API APlayerCharacter : public ACharacter
 public:
 	APlayerCharacter();
 
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	UPROPERTY (EditAnywhere, Category = "Gamepad", meta = (ClampMin = 10, ClampMax = 120)) float _gamepadSensivity = 70.f;
+
+	UPROPERTY (VisibleAnywhere) class UCameraComponent* _camera;
+	UPROPERTY (VisibleAnywhere) class USpringArmComponent* _springArm;
+
 protected:
 	virtual void BeginPlay() override;
 
-public:
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
+
+	void MoveForward(float axisValue);
+	void MoveRight(float axisValue);
+	void LookUpRate(float axisValue);
+	void LookRightRate(float axisValue);
+
+
+	void SetComponents();
 
 };
