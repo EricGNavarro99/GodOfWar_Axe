@@ -22,6 +22,8 @@ public:
 	UPROPERTY (VisibleAnywhere) class UCameraComponent* _camera;
 	UPROPERTY (VisibleAnywhere) class USpringArmComponent* _springArm;
 
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -32,6 +34,7 @@ private:
 	void LookUpRate(float axisValue);
 	void LookRightRate(float axisValue);
 
+	void AssembleCharacter();
 
 	void SetComponents();
 

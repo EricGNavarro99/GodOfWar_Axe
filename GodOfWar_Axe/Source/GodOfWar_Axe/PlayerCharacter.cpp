@@ -36,6 +36,12 @@ void APlayerCharacter::LookRightRate(float axisValue)
 	AddControllerYawInput(axisValue * _gamepadSensivity * GetWorld()->GetDeltaSeconds());
 }
 
+void APlayerCharacter::AssembleCharacter()
+{
+	if (!_bIsArmed) _bIsArmed = true;
+	else _bIsArmed = false;
+}
+
 void APlayerCharacter::SetComponents()
 {
 	_springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
@@ -69,6 +75,8 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 		PlayerInputComponent->BindAxis(TEXT("LookUpRate"), this, &APlayerCharacter::LookUpRate);
 		PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &APlayerCharacter::LookRightRate);
+
+		PlayerInputComponent->BindAction(TEXT("Assemble"), IE_Released, this, &APlayerCharacter::AssembleCharacter);
 	}
 
 }
