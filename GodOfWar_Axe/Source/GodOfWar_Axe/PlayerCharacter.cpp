@@ -13,17 +13,18 @@ APlayerCharacter::APlayerCharacter()
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void APlayerCharacter::MoveForward(float axisValue)
 {
 	AddMovementInput(GetActorForwardVector() * axisValue);
+	CheckPlayerMovement();
 }
 
 void APlayerCharacter::MoveRight(float axisValue)
 {
 	AddMovementInput(GetActorRightVector() * axisValue);
+	CheckPlayerMovement();
 }
 
 void APlayerCharacter::LookUpRate(float axisValue)
@@ -38,8 +39,13 @@ void APlayerCharacter::LookRightRate(float axisValue)
 
 void APlayerCharacter::AssembleCharacter()
 {
-	if (!_bIsArmed) _bIsArmed = true;
-	else _bIsArmed = false;
+	_bIsArmed = !_bIsArmed ? true : false;
+}
+
+void APlayerCharacter::CheckPlayerMovement()
+{
+	_bIsWalking = (GetVelocity() != FVector(0.0f, 0.0f, 0.0f)) ? true : false;
+	UE_LOG(LogTemp, Warning, TEXT("Executing"));
 }
 
 void APlayerCharacter::SetComponents()
@@ -59,7 +65,6 @@ void APlayerCharacter::SetComponents()
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
