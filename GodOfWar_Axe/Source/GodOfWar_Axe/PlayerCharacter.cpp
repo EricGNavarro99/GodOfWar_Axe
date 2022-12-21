@@ -37,6 +37,16 @@ void APlayerCharacter::LookRightRate(float axisValue)
 	AddControllerYawInput(axisValue * _gamepadSensivity * GetWorld()->GetDeltaSeconds());
 }
 
+void APlayerCharacter::Point()
+{
+	_bIsPointing = true;
+}
+
+void APlayerCharacter::StopPointing()
+{
+	_bIsPointing = false;
+}
+
 void APlayerCharacter::AssembleCharacter()
 {
 	_bIsArmed = !_bIsArmed ? true : false;
@@ -82,6 +92,9 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &APlayerCharacter::LookRightRate);
 
 		PlayerInputComponent->BindAction(TEXT("Assemble"), IE_Released, this, &APlayerCharacter::AssembleCharacter);
+
+		PlayerInputComponent->BindAction(TEXT("Point"), IE_Pressed, this, &APlayerCharacter::Point);
+		PlayerInputComponent->BindAction(TEXT("Point"), IE_Released, this, &APlayerCharacter::StopPointing);
 	}
 
 }

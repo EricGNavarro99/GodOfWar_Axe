@@ -22,8 +22,9 @@ public:
 	UPROPERTY (VisibleAnywhere) class UCameraComponent* _camera;
 	UPROPERTY (VisibleAnywhere) class USpringArmComponent* _springArm;
 
-	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
-	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, meta = (DisplayName = "Is Walking")) bool _bIsWalking = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Walking")) bool _bIsWalking = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Pointing")) bool _bIsPointing = false;
 
 protected:
 	virtual void BeginPlay() override;
@@ -34,6 +35,9 @@ private:
 	void MoveRight(float axisValue);
 	void LookUpRate(float axisValue);
 	void LookRightRate(float axisValue);
+
+	void Point();
+	void StopPointing();
 
 	void AssembleCharacter();
 	void CheckPlayerMovement();
