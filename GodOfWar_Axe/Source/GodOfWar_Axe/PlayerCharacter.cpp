@@ -3,11 +3,18 @@
 #include "PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 APlayerCharacter::APlayerCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	SetComponents();
+}
+
+void APlayerCharacter::EquipAxe(bool bIsArmed)
+{
+	_spineAxe->SetVisibility(bIsArmed ? false : true);
+	_rightHandAxe->SetVisibility(bIsArmed ? true : false);
 }
 
 void APlayerCharacter::BeginPlay()
@@ -55,16 +62,19 @@ void APlayerCharacter::AssembleCharacter()
 void APlayerCharacter::CheckPlayerMovement()
 {
 	_bIsWalking = (GetVelocity() != FVector(0.0f, 0.0f, 0.0f)) ? true : false;
-	UE_LOG(LogTemp, Warning, TEXT("Executing"));
 }
 
 void APlayerCharacter::SetComponents()
 {
 	_springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	_camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	_rightHandAxe = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightHandAxe"));
+	_spineAxe = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpineAxe"));
 
 	_springArm->SetupAttachment(RootComponent);
 	_camera->SetupAttachment(_springArm, USpringArmComponent::SocketName);
+	_rightHandAxe->SetupAttachment(GetMesh(), FName("RightHandSocket"));
+	_spineAxe->SetupAttachment(GetMesh(), FName("SpineAxe"));
 
 	_springArm->bUsePawnControlRotation = 1;
 	_springArm->SetWorldLocation(FVector(0.0f, 0.0f, 50.0f));

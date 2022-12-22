@@ -21,10 +21,14 @@ public:
 
 	UPROPERTY (VisibleAnywhere) class UCameraComponent* _camera;
 	UPROPERTY (VisibleAnywhere) class USpringArmComponent* _springArm;
+	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _rightHandAxe;
+	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _spineAxe;
 
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Walking")) bool _bIsWalking = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Pointing")) bool _bIsPointing = false;
+
+	UFUNCTION(BlueprintCallable) void EquipAxe(bool bIsArmed);
 
 protected:
 	virtual void BeginPlay() override;

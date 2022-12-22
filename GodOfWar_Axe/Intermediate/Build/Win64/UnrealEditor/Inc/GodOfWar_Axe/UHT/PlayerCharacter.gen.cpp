@@ -12,12 +12,63 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	GODOFWAR_AXE_API UClass* Z_Construct_UClass_APlayerCharacter();
 	GODOFWAR_AXE_API UClass* Z_Construct_UClass_APlayerCharacter_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_GodOfWar_Axe();
 // End Cross Module References
+	DEFINE_FUNCTION(APlayerCharacter::execEquipAxe)
+	{
+		P_GET_UBOOL(Z_Param_bIsArmed);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->EquipAxe(Z_Param_bIsArmed);
+		P_NATIVE_END;
+	}
 	void APlayerCharacter::StaticRegisterNativesAPlayerCharacter()
 	{
+		UClass* Class = APlayerCharacter::StaticClass();
+		static const FNameNativePtrPair Funcs[] = {
+			{ "EquipAxe", &APlayerCharacter::execEquipAxe },
+		};
+		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics
+	{
+		struct PlayerCharacter_eventEquipAxe_Parms
+		{
+			bool bIsArmed;
+		};
+		static void NewProp_bIsArmed_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsArmed;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::NewProp_bIsArmed_SetBit(void* Obj)
+	{
+		((PlayerCharacter_eventEquipAxe_Parms*)Obj)->bIsArmed = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::NewProp_bIsArmed = { "bIsArmed", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(PlayerCharacter_eventEquipAxe_Parms), &Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::NewProp_bIsArmed_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::NewProp_bIsArmed,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "PlayerCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APlayerCharacter, nullptr, "EquipAxe", nullptr, nullptr, sizeof(Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::PlayerCharacter_eventEquipAxe_Parms), Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_APlayerCharacter_EquipAxe()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_APlayerCharacter_EquipAxe_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APlayerCharacter);
 	UClass* Z_Construct_UClass_APlayerCharacter_NoRegister()
@@ -27,6 +78,7 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 	struct Z_Construct_UClass_APlayerCharacter_Statics
 	{
 		static UObject* (*const DependentSingletons[])();
+		static const FClassFunctionLinkInfo FuncInfo[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
@@ -42,6 +94,14 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp__springArm_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp__springArm;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp__rightHandAxe_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp__rightHandAxe;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp__spineAxe_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp__spineAxe;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp__bIsArmed_MetaData[];
 #endif
@@ -64,6 +124,9 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 	UObject* (*const Z_Construct_UClass_APlayerCharacter_Statics::DependentSingletons[])() = {
 		(UObject* (*)())Z_Construct_UClass_ACharacter,
 		(UObject* (*)())Z_Construct_UPackage__Script_GodOfWar_Axe,
+	};
+	const FClassFunctionLinkInfo Z_Construct_UClass_APlayerCharacter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_APlayerCharacter_EquipAxe, "EquipAxe" }, // 4078495515
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APlayerCharacter_Statics::Class_MetaDataParams[] = {
@@ -97,6 +160,22 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerCharacter_Statics::NewProp__springArm = { "_springArm", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(APlayerCharacter, _springArm), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_APlayerCharacter_Statics::NewProp__springArm_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerCharacter_Statics::NewProp__springArm_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APlayerCharacter_Statics::NewProp__rightHandAxe_MetaData[] = {
+		{ "Category", "PlayerCharacter" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "PlayerCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerCharacter_Statics::NewProp__rightHandAxe = { "_rightHandAxe", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(APlayerCharacter, _rightHandAxe), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_APlayerCharacter_Statics::NewProp__rightHandAxe_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerCharacter_Statics::NewProp__rightHandAxe_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APlayerCharacter_Statics::NewProp__spineAxe_MetaData[] = {
+		{ "Category", "PlayerCharacter" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "PlayerCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerCharacter_Statics::NewProp__spineAxe = { "_spineAxe", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(APlayerCharacter, _spineAxe), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_APlayerCharacter_Statics::NewProp__spineAxe_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerCharacter_Statics::NewProp__spineAxe_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APlayerCharacter_Statics::NewProp__bIsArmed_MetaData[] = {
 		{ "Category", "Player Status" },
@@ -137,6 +216,8 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__gamepadSensivity,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__camera,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__springArm,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__rightHandAxe,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__spineAxe,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__bIsArmed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__bIsWalking,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp__bIsPointing,
@@ -149,11 +230,11 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 		"Game",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
-		nullptr,
+		FuncInfo,
 		Z_Construct_UClass_APlayerCharacter_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
-		0,
+		UE_ARRAY_COUNT(FuncInfo),
 		UE_ARRAY_COUNT(Z_Construct_UClass_APlayerCharacter_Statics::PropPointers),
 		0,
 		0x009000A4u,
@@ -178,9 +259,9 @@ void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_APlayerCharacter, APlayerCharacter::StaticClass, TEXT("APlayerCharacter"), &Z_Registration_Info_UClass_APlayerCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerCharacter), 845600200U) },
+		{ Z_Construct_UClass_APlayerCharacter, APlayerCharacter::StaticClass, TEXT("APlayerCharacter"), &Z_Registration_Info_UClass_APlayerCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerCharacter), 168549698U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_2582391678(TEXT("/Script/GodOfWar_Axe"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_2606989703(TEXT("/Script/GodOfWar_Axe"),
 		Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
