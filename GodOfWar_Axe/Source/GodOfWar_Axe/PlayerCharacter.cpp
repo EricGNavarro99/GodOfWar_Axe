@@ -3,7 +3,6 @@
 #include "PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Components/StaticMeshComponent.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -20,6 +19,8 @@ void APlayerCharacter::EquipAxe(bool bIsArmed)
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	EquipAxe(false);
 }
 
 void APlayerCharacter::MoveForward(float axisValue)
@@ -45,7 +46,7 @@ void APlayerCharacter::LookRightRate(float axisValue)
 }
 
 void APlayerCharacter::Point()
-{
+{	
 	_bIsPointing = true;
 }
 
@@ -56,7 +57,20 @@ void APlayerCharacter::StopPointing()
 
 void APlayerCharacter::AssembleCharacter()
 {
+	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage) || GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage)) return;
+	
 	_bIsArmed = !_bIsArmed ? true : false;
+
+	if (_armAxeAnimMontage == nullptr || _disarmAxeAnimMontage == nullptr) return;
+
+	if (_bIsArmed)
+	{
+		if (!GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage)) PlayAnimMontage(_disarmAxeAnimMontage, 1.0f, TEXT("NONE"));
+	}
+	else
+	{
+		if (!GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage)) PlayAnimMontage(_armAxeAnimMontage, 1.0f, TEXT("NONE"));
+	}
 }
 
 void APlayerCharacter::CheckPlayerMovement()
