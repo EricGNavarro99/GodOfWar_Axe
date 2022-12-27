@@ -12,6 +12,8 @@ APlayerCharacter::APlayerCharacter()
 
 void APlayerCharacter::EquipAxe(bool bIsArmed)
 {
+	if (_bIsPointing) return;
+
 	_spineAxe->SetVisibility(bIsArmed ? false : true);
 	_rightHandAxe->SetVisibility(bIsArmed ? true : false);
 }
@@ -46,18 +48,22 @@ void APlayerCharacter::LookRightRate(float axisValue)
 }
 
 void APlayerCharacter::Point()
-{	
+{
+	if (_bIsArmed == false) return;
+
 	_bIsPointing = true;
 }
 
 void APlayerCharacter::StopPointing()
 {
+	if (_bIsArmed == false) return;
+
 	_bIsPointing = false;
 }
 
 void APlayerCharacter::AssembleCharacter()
 {
-	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage) || GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage)) return;
+	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage) || GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage) || _bIsPointing) return;
 	
 	_bIsArmed = !_bIsArmed ? true : false;
 
@@ -92,13 +98,28 @@ void APlayerCharacter::SetComponents()
 
 	_springArm->bUsePawnControlRotation = 1;
 	_springArm->SetWorldLocation(FVector(0.0f, 0.0f, 50.0f));
-	_springArm->TargetArmLength = 170.0f;
-	_springArm->SocketOffset.Y = 70.0f;
+	_springArm->TargetArmLength = _initialTargetArmLenght;
+	_springArm->SocketOffset.Y = _initialSocketOffsetY;
 }
 
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	// Change it!!
+
+	if (_bIsPointing && _bIsArmed)
+	{
+		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _pointingTargetArmLenght, DeltaTime, 1.0f);
+		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _pointingSocketOffsetY, DeltaTime, 1.0f);
+
+	}
+
+	if (!_bIsPointing && _bIsArmed)
+	{
+		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, DeltaTime, 1.0f);
+		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, DeltaTime, 1.0f);
+	}
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

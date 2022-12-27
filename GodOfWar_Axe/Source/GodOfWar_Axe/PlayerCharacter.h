@@ -27,6 +27,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Animation montages") UAnimMontage* _armAxeAnimMontage;
 	UPROPERTY(EditAnywhere, Category = "Animation montages") UAnimMontage* _disarmAxeAnimMontage;
 
+	UPROPERTY(EditAnywhere, Category = "Point options") float _initialTargetArmLenght = 100.0f;
+	UPROPERTY(EditAnywhere, Category = "Point options") float _initialSocketOffsetY = 65.0f;
+	UPROPERTY(EditAnywhere, Category = "Point options") float _pointingTargetArmLenght = 50.0f;
+	UPROPERTY(EditAnywhere, Category = "Point options") float _pointingSocketOffsetY = 35.0f;
+
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Walking")) bool _bIsWalking = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Pointing")) bool _bIsPointing = false;
@@ -50,5 +55,7 @@ private:
 	void CheckPlayerMovement();
 
 	void SetComponents();
+
+
 
 };

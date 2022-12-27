@@ -1,0 +1,25 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\source\\godofwar_axe\\playercharacter.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\intermediate\\build\\win64\\godofwar_axeeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\intermediate\\build\\win64\\unrealeditor\\development\\godofwar_axe\\definitions.godofwar_axe.h",
+            "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\source\\godofwar_axe\\playercharacter.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementreplication.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
+            "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\intermediate\\build\\win64\\unrealeditor\\inc\\godofwar_axe\\uht\\playercharacter.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\camera\\cameracomponent.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\cameracomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\springarmcomponent.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\springarmcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
