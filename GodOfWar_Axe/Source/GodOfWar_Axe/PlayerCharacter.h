@@ -50,12 +50,10 @@ private:
 
 	void Point();
 	void StopPointing();
+	void MoveCameraWhenIsPointing(float deltaTime);
 
 	void AssembleCharacter();
 	void CheckPlayerMovement();
 
 	void SetComponents();
-
-
-
 };

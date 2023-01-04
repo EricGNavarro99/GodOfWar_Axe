@@ -61,6 +61,24 @@ void APlayerCharacter::StopPointing()
 	_bIsPointing = false;
 }
 
+void APlayerCharacter::MoveCameraWhenIsPointing(float deltaTime)
+{
+	if (!_bIsArmed) return;
+
+	if (_bIsPointing && _bIsArmed)
+	{
+		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _pointingTargetArmLenght, deltaTime, 1.0f);
+		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _pointingSocketOffsetY, deltaTime, 1.0f);
+
+	}
+
+	if (!_bIsPointing && _bIsArmed)
+	{
+		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, deltaTime, 1.0f);
+		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, deltaTime, 1.0f);
+	}
+}
+
 void APlayerCharacter::AssembleCharacter()
 {
 	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage) || GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage) || _bIsPointing) return;
@@ -106,20 +124,7 @@ void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Change it!!
-
-	if (_bIsPointing && _bIsArmed)
-	{
-		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _pointingTargetArmLenght, DeltaTime, 1.0f);
-		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _pointingSocketOffsetY, DeltaTime, 1.0f);
-
-	}
-
-	if (!_bIsPointing && _bIsArmed)
-	{
-		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, DeltaTime, 1.0f);
-		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, DeltaTime, 1.0f);
-	}
+	MoveCameraWhenIsPointing(DeltaTime);
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
