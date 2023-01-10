@@ -18,6 +18,11 @@ void APlayerCharacter::EquipAxe(bool bIsArmed)
 	_rightHandAxe->SetVisibility(bIsArmed ? true : false);
 }
 
+void APlayerCharacter::MakeHandAxeAppearDisappear(bool bMakeDisappear)
+{
+	_rightHandAxe->SetVisibility(!bMakeDisappear);
+}
+
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -49,39 +54,48 @@ void APlayerCharacter::LookRightRate(float axisValue)
 
 void APlayerCharacter::Point()
 {
-	if (_bIsArmed == false) return;
+	if (!_bIsArmed) return;
 
 	_bIsPointing = true;
 }
 
 void APlayerCharacter::StopPointing()
 {
-	if (_bIsArmed == false) return;
+	if (!_bIsArmed) return;
 
 	_bIsPointing = false;
 }
 
 void APlayerCharacter::MoveCameraWhenIsPointing(float deltaTime)
 {
-	if (!_bIsArmed) return;
-
-	if (_bIsPointing && _bIsArmed)
+	if (!_bIsArmed)
 	{
-		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _pointingTargetArmLenght, deltaTime, 1.0f);
-		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _pointingSocketOffsetY, deltaTime, 1.0f);
-
+		if (_springArm->TargetArmLength != _initialTargetArmLenght && _springArm->SocketOffset.Y != _initialSocketOffsetY)
+		{
+			_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, deltaTime, 0.5f);
+			_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, deltaTime, 0.5f);
+		}
+		else return;
+			
 	}
-
-	if (!_bIsPointing && _bIsArmed)
+	else
 	{
-		_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, deltaTime, 1.0f);
-		_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, deltaTime, 1.0f);
+		if (_bIsPointing)
+		{
+			_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _pointingTargetArmLenght, deltaTime, 0.5f);
+			_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _pointingSocketOffsetY, deltaTime, 0.5f);
+		}
+		else
+		{
+			_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, deltaTime, 0.5f);
+			_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, deltaTime, 0.5f);
+		}
 	}
 }
 
 void APlayerCharacter::AssembleCharacter()
 {
-	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage) || GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage) || _bIsPointing) return;
+	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_disarmAxeAnimMontage) || GetMesh()->GetAnimInstance()->Montage_IsPlaying(_armAxeAnimMontage) || _bIsPointing || !_bHavePlayerTheAxe) return;
 	
 	_bIsArmed = !_bIsArmed ? true : false;
 
@@ -102,6 +116,24 @@ void APlayerCharacter::CheckPlayerMovement()
 	_bIsWalking = (GetVelocity() != FVector(0.0f, 0.0f, 0.0f)) ? true : false;
 }
 
+void APlayerCharacter::ThrowAxeStart()
+{
+	if (GetMesh()->GetAnimInstance()->Montage_IsPlaying(_throwAxeAnimMontage) || !_bHavePlayerTheAxe || (!_bIsArmed && !_bIsPointing)) return;
+
+	_bJustThrowAxe = true;
+	_bHavePlayerTheAxe = false;
+
+	if (!GetMesh()->GetAnimInstance()->Montage_IsPlaying(_throwAxeAnimMontage)) PlayAnimMontage(_throwAxeAnimMontage, 1.0f, TEXT("NONE"));
+
+	_bIsArmed = false;
+	_bIsPointing = false;
+}
+
+void APlayerCharacter::ThrowAxeEnd()
+{
+	_bJustThrowAxe = false;
+}
+
 void APlayerCharacter::SetComponents()
 {
 	_springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
@@ -120,10 +152,20 @@ void APlayerCharacter::SetComponents()
 	_springArm->SocketOffset.Y = _initialSocketOffsetY;
 }
 
+void APlayerCharacter::ShowPlayerStatusInScreen()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bIsArmed ? FColor::Green : FColor::Red, TEXT("> Is Armed"));
+	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bIsWalking ? FColor::Green : FColor::Red, TEXT("> Is Walking"));
+	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bIsPointing ? FColor::Green : FColor::Red, TEXT("> Is Pointing"));
+	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bHavePlayerTheAxe ? FColor::Green : FColor::Red, TEXT("> Have Player The Axe"));
+	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bJustThrowAxe ? FColor::Green : FColor::Red, TEXT("> Just Throw Axe"));
+}
+
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	ShowPlayerStatusInScreen();
 	MoveCameraWhenIsPointing(DeltaTime);
 }
 
@@ -145,6 +187,10 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 		PlayerInputComponent->BindAction(TEXT("Point"), IE_Pressed, this, &APlayerCharacter::Point);
 		PlayerInputComponent->BindAction(TEXT("Point"), IE_Released, this, &APlayerCharacter::StopPointing);
+
+		PlayerInputComponent->BindAction(TEXT("Throw"), IE_Pressed, this, &APlayerCharacter::ThrowAxeStart);
+		PlayerInputComponent->BindAction(TEXT("Throw"), IE_Released, this, &APlayerCharacter::ThrowAxeEnd);
 	}
 
 }
+

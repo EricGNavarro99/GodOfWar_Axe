@@ -17,11 +17,13 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_12_SPARSE_DATA
 #define FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_12_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execMakeHandAxeAppearDisappear); \
 	DECLARE_FUNCTION(execEquipAxe);
 
 
 #define FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_PlayerCharacter_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execMakeHandAxeAppearDisappear); \
 	DECLARE_FUNCTION(execEquipAxe);
 
 

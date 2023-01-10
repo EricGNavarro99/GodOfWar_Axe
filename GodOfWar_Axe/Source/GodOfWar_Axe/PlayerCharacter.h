@@ -24,19 +24,22 @@ public:
 	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _rightHandAxe;
 	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _spineAxe;
 
-	UPROPERTY(EditAnywhere, Category = "Animation montages") UAnimMontage* _armAxeAnimMontage;
-	UPROPERTY(EditAnywhere, Category = "Animation montages") UAnimMontage* _disarmAxeAnimMontage;
+	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _armAxeAnimMontage;
+	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _disarmAxeAnimMontage;
+	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _throwAxeAnimMontage;
 
-	UPROPERTY(EditAnywhere, Category = "Point options") float _initialTargetArmLenght = 100.0f;
-	UPROPERTY(EditAnywhere, Category = "Point options") float _initialSocketOffsetY = 65.0f;
-	UPROPERTY(EditAnywhere, Category = "Point options") float _pointingTargetArmLenght = 50.0f;
-	UPROPERTY(EditAnywhere, Category = "Point options") float _pointingSocketOffsetY = 35.0f;
+	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialTargetArmLenght = 100.0f;
+	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialSocketOffsetY = 65.0f;
+	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingTargetArmLenght = 50.0f;
+	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingSocketOffsetY = 35.0f;
 
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Walking")) bool _bIsWalking = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Pointing")) bool _bIsPointing = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Just Throw Axe")) bool _bJustThrowAxe = false;
 
 	UFUNCTION(BlueprintCallable) void EquipAxe(bool bIsArmed);
+	UFUNCTION(BlueprintCallable) void MakeHandAxeAppearDisappear(bool bMakeDisappear);
 
 protected:
 	virtual void BeginPlay() override;
@@ -55,5 +58,11 @@ private:
 	void AssembleCharacter();
 	void CheckPlayerMovement();
 
+	void ThrowAxeStart();
+	void ThrowAxeEnd();
+	bool _bHavePlayerTheAxe = true;
+
 	void SetComponents();
+
+	void ShowPlayerStatusInScreen();
 };
