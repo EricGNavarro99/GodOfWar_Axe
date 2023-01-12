@@ -1,6 +1,7 @@
 // Created by Eric G. Navarro
 
 #include "PlayerCharacter.h"
+#include "Axe.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -21,6 +22,15 @@ void APlayerCharacter::EquipAxe(bool bIsArmed)
 void APlayerCharacter::MakeHandAxeAppearDisappear(bool bMakeDisappear)
 {
 	_rightHandAxe->SetVisibility(!bMakeDisappear);
+}
+
+void APlayerCharacter::SpawnAxe()
+{
+	if (_axe != nullptr) 
+	{
+		GetWorld()->SpawnActor<AAxe>(_axe, _rightHandAxe->GetComponentLocation(), _rightHandAxe->GetComponentRotation());
+		// BUSCAR LA MANERA DE QUE SE IMPULSE HACIA DELANTE / LUGAR DONDE SE ESTÉ APUNTANDO.
+	}
 }
 
 void APlayerCharacter::BeginPlay()

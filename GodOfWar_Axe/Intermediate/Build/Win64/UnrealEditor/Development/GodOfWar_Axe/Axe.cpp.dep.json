@@ -1,0 +1,21 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\source\\godofwar_axe\\axe.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\intermediate\\build\\win64\\godofwar_axeeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\intermediate\\build\\win64\\unrealeditor\\development\\godofwar_axe\\definitions.godofwar_axe.h",
+            "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\source\\godofwar_axe\\axe.h",
+            "c:\\users\\ericg\\onedrive\\documentos\\github\\godofwar_axe\\godofwar_axe\\intermediate\\build\\win64\\unrealeditor\\inc\\godofwar_axe\\uht\\axe.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\projectilemovementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\movementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\movementcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\projectilemovementcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\rotatingmovementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rotatingmovementcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

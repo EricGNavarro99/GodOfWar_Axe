@@ -28,6 +28,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _disarmAxeAnimMontage;
 	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _throwAxeAnimMontage;
 
+	UPROPERTY(EditAnywhere, Category = "Axe") TSubclassOf<class AAxe> _axe;
+
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialTargetArmLenght = 100.0f;
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialSocketOffsetY = 65.0f;
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingTargetArmLenght = 50.0f;
@@ -40,6 +42,7 @@ public:
 
 	UFUNCTION(BlueprintCallable) void EquipAxe(bool bIsArmed);
 	UFUNCTION(BlueprintCallable) void MakeHandAxeAppearDisappear(bool bMakeDisappear);
+	UFUNCTION(BlueprintCallable) void SpawnAxe();
 
 protected:
 	virtual void BeginPlay() override;
