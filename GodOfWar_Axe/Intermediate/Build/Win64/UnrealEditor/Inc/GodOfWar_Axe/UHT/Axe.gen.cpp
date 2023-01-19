@@ -10,9 +10,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeAxe() {}
 // Cross Module References
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
-	ENGINE_API UClass* Z_Construct_UClass_UProjectileMovementComponent_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_URotatingMovementComponent_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	GODOFWAR_AXE_API UClass* Z_Construct_UClass_AAxe();
 	GODOFWAR_AXE_API UClass* Z_Construct_UClass_AAxe_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_GodOfWar_Axe();
@@ -31,19 +28,6 @@ void EmptyLinkFunctionForGeneratedCodeAxe() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp__axeStaticMesh_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp__axeStaticMesh;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp__projectileMovement_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp__projectileMovement;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp__rotatingMovement_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp__rotatingMovement;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
@@ -57,35 +41,6 @@ void EmptyLinkFunctionForGeneratedCodeAxe() {}
 		{ "ModuleRelativePath", "Axe.h" },
 	};
 #endif
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAxe_Statics::NewProp__axeStaticMesh_MetaData[] = {
-		{ "Category", "Axe" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Axe.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAxe_Statics::NewProp__axeStaticMesh = { "_axeStaticMesh", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAxe, _axeStaticMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAxe_Statics::NewProp__axeStaticMesh_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAxe_Statics::NewProp__axeStaticMesh_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAxe_Statics::NewProp__projectileMovement_MetaData[] = {
-		{ "Category", "Axe" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Axe.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAxe_Statics::NewProp__projectileMovement = { "_projectileMovement", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAxe, _projectileMovement), Z_Construct_UClass_UProjectileMovementComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAxe_Statics::NewProp__projectileMovement_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAxe_Statics::NewProp__projectileMovement_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAxe_Statics::NewProp__rotatingMovement_MetaData[] = {
-		{ "Category", "Axe" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Axe.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AAxe_Statics::NewProp__rotatingMovement = { "_rotatingMovement", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AAxe, _rotatingMovement), Z_Construct_UClass_URotatingMovementComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AAxe_Statics::NewProp__rotatingMovement_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AAxe_Statics::NewProp__rotatingMovement_MetaData)) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AAxe_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAxe_Statics::NewProp__axeStaticMesh,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAxe_Statics::NewProp__projectileMovement,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AAxe_Statics::NewProp__rotatingMovement,
-	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AAxe_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AAxe>::IsAbstract,
 	};
@@ -95,11 +50,11 @@ void EmptyLinkFunctionForGeneratedCodeAxe() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		Z_Construct_UClass_AAxe_Statics::PropPointers,
+		nullptr,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		UE_ARRAY_COUNT(Z_Construct_UClass_AAxe_Statics::PropPointers),
+		0,
 		0,
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_AAxe_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AAxe_Statics::Class_MetaDataParams))
@@ -123,9 +78,9 @@ void EmptyLinkFunctionForGeneratedCodeAxe() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_Axe_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAxe, AAxe::StaticClass, TEXT("AAxe"), &Z_Registration_Info_UClass_AAxe, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAxe), 3324317475U) },
+		{ Z_Construct_UClass_AAxe, AAxe::StaticClass, TEXT("AAxe"), &Z_Registration_Info_UClass_AAxe, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAxe), 1737078123U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_Axe_h_223768102(TEXT("/Script/GodOfWar_Axe"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_Axe_h_3708667159(TEXT("/Script/GodOfWar_Axe"),
 		Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_Axe_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_ericg_OneDrive_Documentos_GitHub_GodOfWar_Axe_GodOfWar_Axe_Source_GodOfWar_Axe_Axe_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

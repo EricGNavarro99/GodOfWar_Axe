@@ -15,14 +15,7 @@ public:
 	AAxe();
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere) class UStaticMeshComponent* _axeStaticMesh;
-	UPROPERTY(VisibleAnywhere) class UProjectileMovementComponent* _projectileMovement;
-	UPROPERTY(VisibleAnywhere) class URotatingMovementComponent* _rotatingMovement;
-
 protected:
 	virtual void BeginPlay() override;
-
-private:
-	void SetComponents();
 
 };

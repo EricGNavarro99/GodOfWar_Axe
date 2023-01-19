@@ -29,7 +29,6 @@ void APlayerCharacter::SpawnAxe()
 	if (_axe != nullptr) 
 	{
 		GetWorld()->SpawnActor<AAxe>(_axe, _rightHandAxe->GetComponentLocation(), _rightHandAxe->GetComponentRotation());
-		// BUSCAR LA MANERA DE QUE SE IMPULSE HACIA DELANTE / LUGAR DONDE SE ESTÉ APUNTANDO.
 	}
 }
 
