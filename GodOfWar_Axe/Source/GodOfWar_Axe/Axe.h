@@ -15,7 +15,14 @@ public:
 	AAxe();
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleAnywhere) class USceneComponent* _root;
+	UPROPERTY(VisibleAnywhere) class UArrowComponent* _arrow;
+	UPROPERTY(VisibleAnywhere) class UStaticMeshComponent* _staticMesh;
+
 protected:
 	virtual void BeginPlay() override;
+
+private:
+	void SetComponents();
 
 };
