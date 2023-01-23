@@ -24,5 +24,7 @@ protected:
 
 private:
 	void SetComponents();
-
+	FVector HitLocation();
+	class APlayerCharacter* _player = nullptr;
+	class AController* _playerController = nullptr;
 };
