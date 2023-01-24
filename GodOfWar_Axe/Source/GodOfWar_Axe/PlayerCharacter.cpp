@@ -163,6 +163,8 @@ void APlayerCharacter::SetComponents()
 
 void APlayerCharacter::ShowPlayerStatusInScreen()
 {
+	if (!_bShowPlayerStatus) return;
+
 	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bIsArmed ? FColor::Green : FColor::Red, TEXT("> Is Armed"));
 	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bIsWalking ? FColor::Green : FColor::Red, TEXT("> Is Walking"));
 	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bIsPointing ? FColor::Green : FColor::Red, TEXT("> Is Pointing"));

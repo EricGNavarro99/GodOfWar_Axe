@@ -35,10 +35,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingTargetArmLenght = 50.0f;
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingSocketOffsetY = 35.0f;
 
-	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Armed")) bool _bIsArmed = false;
-	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Walking")) bool _bIsWalking = false;
-	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is Pointing")) bool _bIsPointing = false;
-	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Just Throw Axe")) bool _bJustThrowAxe = false;
+	UPROPERTY(EditAnywhere, Category = "Editor options", meta = (Display = "Show player status")) bool _bShowPlayerStatus = false;
+
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is armed")) bool _bIsArmed = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is walking")) bool _bIsWalking = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is pointing")) bool _bIsPointing = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Just throw axe")) bool _bJustThrowAxe = false;
 
 	UFUNCTION(BlueprintCallable) void EquipAxe(bool bIsArmed);
 	UFUNCTION(BlueprintCallable) void MakeHandAxeAppearDisappear(bool bMakeDisappear);
