@@ -18,25 +18,26 @@ public:
 	UPROPERTY(VisibleAnywhere) class USceneComponent* _root;
 	UPROPERTY(VisibleAnywhere) class UArrowComponent* _arrow;
 	UPROPERTY(VisibleAnywhere) class UStaticMeshComponent* _staticMesh;
+	UPROPERTY(VisibleAnywhere) class USphereComponent* _trigger;
 
-	UPROPERTY(EditAnywhere, Category = "Editor options", meta = (DisplayName = "Show hit location")) bool _bShowHitLocation = false;
-	UPROPERTY(EditAnywhere, Category = "Axe options", meta = (ClampMin = 0.0f, ClampMax = 50.0f)) float _axeRotationSpeed = 10.0f;
-	UPROPERTY(EditAnywhere, Category = "Axe options", meta = (ClampMin = 0.0f, ClampMax = 100.0f)) int32 _axeInitialMovementSpeed = 10;
+	UPROPERTY(VisibleAnywhere) class UProjectileMovementComponent* _projectileComponent;
+	UPROPERTY(VisibleAnywhere) class URotatingMovementComponent* _rotatingComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Axe Options", meta = (ClampMin = 0.0f, ClampMax = 5000.0f)) float _rotationSpeed = 2500.0f;
+	UPROPERTY(EditAnywhere, Category = "Axe Options", meta = (ClampMin = 0.0f, ClampMax = 5000.0f)) float _movementSpeed = 2500.0f;
 
 protected:
 	virtual void BeginPlay() override;
 
 private:
 	void SetComponents();
-	void MoveAxeToHitLocation(float deltaTime);
-	void RotateAxeToHitLocation();
+	void EnableProjectileMovementComponent(bool bEnable);
+	void EnableRotatingMovementComponent(bool bEnable);
 
-	FVector HitLocation();
-	FVector _initialHitLocation;
+	UFUNCTION() void StickAxe(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult);
+	void RelocateStickedAxe();
 
-	class APlayerCharacter* _player = nullptr;
-	class AController* _playerController = nullptr;
-
-	bool _bStopRotating = false;
+	//class APlayerCharacter* _player = nullptr;
+	//class AController* _playerController = nullptr;
 	
 };

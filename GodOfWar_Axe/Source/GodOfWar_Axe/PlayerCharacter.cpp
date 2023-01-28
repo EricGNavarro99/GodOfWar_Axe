@@ -28,7 +28,8 @@ void APlayerCharacter::SpawnAxe()
 {
 	if (_axe != nullptr) 
 	{
-		GetWorld()->SpawnActor<AAxe>(_axe, _rightHandAxe->GetComponentLocation(), _rightHandAxe->GetComponentRotation());
+		APlayerController* playerController = Cast<APlayerController>(Controller);
+		GetWorld()->SpawnActor<AAxe>(_axe, _rightHandAxe->GetComponentLocation(), FRotator(-playerController->PlayerCameraManager->GetCameraRotation().Pitch, _rightHandAxe->GetComponentRotation().Yaw, _rightHandAxe->GetComponentRotation().Roll));
 	}
 }
 
@@ -36,6 +37,7 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	BlockCamera();
 	EquipAxe(false);
 }
 
@@ -61,6 +63,16 @@ void APlayerCharacter::LookRightRate(float axisValue)
 	AddControllerYawInput(axisValue * _gamepadSensivity * GetWorld()->GetDeltaSeconds());
 }
 
+void APlayerCharacter::BlockCamera()
+{
+	APlayerController* playerController = Cast<APlayerController>(Controller);
+	if (playerController != nullptr && playerController->PlayerCameraManager)
+	{
+		playerController->PlayerCameraManager->ViewPitchMax = _cameraMaxPitchRotation;
+		playerController->PlayerCameraManager->ViewPitchMin = _cameraMinPitchRotation;
+	}
+}
+
 void APlayerCharacter::Point()
 {
 	if (!_bIsArmed) return;
@@ -84,8 +96,7 @@ void APlayerCharacter::MoveCameraWhenIsPointing(float deltaTime)
 			_springArm->TargetArmLength = FMath::FInterpTo(_springArm->TargetArmLength, _initialTargetArmLenght, deltaTime, 0.5f);
 			_springArm->SocketOffset.Y = FMath::FInterpTo(_springArm->SocketOffset.Y, _initialSocketOffsetY, deltaTime, 0.5f);
 		}
-		else return;
-			
+		else return;			
 	}
 	else
 	{
@@ -202,6 +213,4 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		PlayerInputComponent->BindAction(TEXT("Throw"), IE_Pressed, this, &APlayerCharacter::ThrowAxeStart);
 		PlayerInputComponent->BindAction(TEXT("Throw"), IE_Released, this, &APlayerCharacter::ThrowAxeEnd);
 	}
-
 }
-

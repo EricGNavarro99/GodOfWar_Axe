@@ -35,6 +35,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingTargetArmLenght = 50.0f;
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingSocketOffsetY = 35.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Camera Pitch Limit") float _cameraMinPitchRotation = -24.0f;
+	UPROPERTY(EditAnywhere, Category = "Camera Pitch Limit") float _cameraMaxPitchRotation = 24.0f;
+
 	UPROPERTY(EditAnywhere, Category = "Editor options", meta = (Display = "Show player status")) bool _bShowPlayerStatus = false;
 
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is armed")) bool _bIsArmed = false;
@@ -55,6 +58,8 @@ private:
 	void MoveRight(float axisValue);
 	void LookUpRate(float axisValue);
 	void LookRightRate(float axisValue);
+
+	void BlockCamera();
 
 	void Point();
 	void StopPointing();
