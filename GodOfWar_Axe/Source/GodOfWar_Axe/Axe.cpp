@@ -3,7 +3,7 @@
 #include "Axe.h"
 #include "PlayerCharacter.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Components/SceneComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -25,10 +25,12 @@ void AAxe::BeginPlay()
 	_trigger->OnComponentBeginOverlap.AddDynamic(this, &AAxe::StickAxe);
 
 	//if (_player == nullptr) _player = Cast<APlayerCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass()));
-	//if (_playerController == nullptr) _playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (_playerController == nullptr) _playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	
 	EnableProjectileMovementComponent(true);
 	EnableRotatingMovementComponent(true);
+
+	_hit = HitSurface();
 }
 
 void AAxe::SetComponents()
@@ -43,12 +45,13 @@ void AAxe::SetComponents()
 	SetRootComponent(_root);
 	_arrow->SetupAttachment(_root);
 	_staticMesh->SetupAttachment(_arrow);
-	_trigger->SetupAttachment(_staticMesh);
+	_trigger->SetupAttachment(_arrow);
 
 	_arrow->ArrowSize = -0.05f;
 	_staticMesh->SetWorldLocation(FVector(0.0f, -25.0f, 0.0f));
 	_staticMesh->SetWorldScale3D(FVector(0.08f, 0.08f, 0.08f));
-	_trigger->SetWorldLocation(FVector(-330.0f, 65.0f, 0.0f));
+	_trigger->SetWorldLocation(FVector(-25.0f, -25.0f, 0.0f));
+	_trigger->SetSphereRadius(2.0f);
 
 	_projectileComponent->Velocity = FVector(-1.0f, 0.0f, 0.0f);
 	_projectileComponent->InitialSpeed = _movementSpeed;
@@ -74,11 +77,56 @@ void AAxe::StickAxe(UPrimitiveComponent* overlappedComponent, AActor* otherActor
 {
 	EnableProjectileMovementComponent(false);
 	EnableRotatingMovementComponent(false);
+
+	RelocateStickedAxe();
+
+	_trigger->Deactivate();
 }
 
 void AAxe::RelocateStickedAxe()
 {
-	// When axe hits, relocate rotation of axe.
+	if (_playerController == nullptr) return;
+
+	int32 surfaceInclination = _hit.ImpactNormal.Rotation().Pitch;
+	bool bIsWall = surfaceInclination == 0;
+
+	float location = bIsWall ? _staticMesh->GetRelativeLocation().Y - UKismetMathLibrary::RandomFloatInRange(10.0f, 50.0f) : -25.0f;
+	float rotation = bIsWall ? UKismetMathLibrary::RandomFloatInRange(-40.0f, -50.0f) : UKismetMathLibrary::RandomFloatInRange(-5.0f, -20.0f);
+
+	FVector newLocation = FVector(0.0f, 0.0f, 0.0f);
+	newLocation.Y = location;
+
+	FRotator newRotation = FRotator(0.0f, 0.0f, 0.0f);
+	newRotation.Yaw = rotation;
+
+	if (bIsWall) 
+	{
+		FRotator deletePitchActorRotation = GetActorRotation();
+		deletePitchActorRotation.Pitch = 0.0f;
+		SetActorRotation(deletePitchActorRotation);
+	}
+
+	_staticMesh->SetRelativeLocation(newLocation);
+	_staticMesh->SetRelativeRotation(newRotation);
+}
+
+FHitResult AAxe::HitSurface()
+{
+	if (_playerController == nullptr) return FHitResult();
+
+	FVector location;
+	FRotator rotation;
+	_playerController->GetPlayerViewPoint(location, rotation);
+
+	FVector end = location + rotation.Vector() * 10000;
+
+	FCollisionQueryParams params;
+	params.AddIgnoredActor(this);
+	params.AddIgnoredActor(GetOwner());
+
+	GetWorld()->LineTraceSingleByChannel(_hit, location, end, ECollisionChannel::ECC_GameTraceChannel1, params);
+
+	return _hit;
 }
 
 void AAxe::Tick(float DeltaTime)

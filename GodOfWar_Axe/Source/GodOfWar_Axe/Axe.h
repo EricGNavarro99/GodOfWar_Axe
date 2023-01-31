@@ -38,6 +38,9 @@ private:
 	void RelocateStickedAxe();
 
 	//class APlayerCharacter* _player = nullptr;
-	//class AController* _playerController = nullptr;
+	class AController* _playerController = nullptr;
+
+	FHitResult _hit;
+	FHitResult HitSurface();
 	
 };
