@@ -23,6 +23,7 @@ public:
 	UPROPERTY (VisibleAnywhere) class USpringArmComponent* _springArm;
 	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _rightHandAxe;
 	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _spineAxe;
+	UPROPERTY (VisibleAnywhere) class USphereComponent* _curvePoint;
 
 	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _armAxeAnimMontage;
 	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _disarmAxeAnimMontage;
@@ -32,18 +33,20 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialTargetArmLenght = 100.0f;
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialSocketOffsetY = 65.0f;
-	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingTargetArmLenght = 50.0f;
-	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingSocketOffsetY = 35.0f;
+	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingTargetArmLenght = 85.0f;
+	UPROPERTY(EditAnywhere, Category = "Point Options") float _pointingSocketOffsetY = 50.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Camera Pitch Limit") float _cameraMinPitchRotation = -24.0f;
 	UPROPERTY(EditAnywhere, Category = "Camera Pitch Limit") float _cameraMaxPitchRotation = 24.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Editor options", meta = (Display = "Show player status")) bool _bShowPlayerStatus = false;
+	UPROPERTY(EditAnywhere, Category = "Editor Options", meta = (Display = "Show player status")) bool _bShowPlayerStatus = false;
 
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is armed")) bool _bIsArmed = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is walking")) bool _bIsWalking = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Is pointing")) bool _bIsPointing = false;
 	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Just throw axe")) bool _bJustThrowAxe = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Call axe")) bool _bCallAxe = false;
+	UPROPERTY (VisibleAnywhere, BlueprintReadWrite, Category = "Player Status", meta = (DisplayName = "Have axe")) bool _bHaveAxe = true;
 
 	UFUNCTION(BlueprintCallable) void EquipAxe(bool bIsArmed);
 	UFUNCTION(BlueprintCallable) void MakeHandAxeAppearDisappear(bool bMakeDisappear);
@@ -70,7 +73,7 @@ private:
 
 	void ThrowAxeStart();
 	void ThrowAxeEnd();
-	bool _bHavePlayerTheAxe = true;
+	void CallAxe();
 
 	void SetComponents();
 

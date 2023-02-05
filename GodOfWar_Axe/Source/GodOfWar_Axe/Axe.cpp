@@ -13,7 +13,7 @@
 
 AAxe::AAxe()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	SetComponents();
 }
@@ -24,7 +24,7 @@ void AAxe::BeginPlay()
 
 	_trigger->OnComponentBeginOverlap.AddDynamic(this, &AAxe::StickAxe);
 
-	//if (_player == nullptr) _player = Cast<APlayerCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass()));
+	if (_player == nullptr) _player = Cast<APlayerCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass()));
 	if (_playerController == nullptr) _playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	
 	EnableProjectileMovementComponent(true);
@@ -129,7 +129,48 @@ FHitResult AAxe::HitSurface()
 	return _hit;
 }
 
+void AAxe::ReturnAxeToPlayer()
+{
+	_axeStickedLocation = GetActorLocation();
+	SetActorRotation(_player->_rightHandAxe->GetComponentRotation());
+
+	GetWorldTimerManager().SetTimer(_timerHandle, this, &AAxe::ReturnAxeToPlayer_TimerMethod, 0.01f, true, 0.0f);
+}
+
+FVector AAxe::CreateBQCurve(float time, FVector axeStickedLocation, FVector playerCurvePoint, FVector axeHandLocation)
+{
+	return (FMath::Pow(1 - time, 2) * axeStickedLocation) + (2 * (1 - time) * time * playerCurvePoint) + (FMath::Pow(time, 2) * axeHandLocation);
+}
+
+void AAxe::ReturnAxeToPlayer_TimerMethod()
+{
+	SetActorLocation(CreateBQCurve(_timer, _axeStickedLocation, _player->_curvePoint->GetComponentLocation(), _player->_rightHandAxe->GetComponentLocation()));
+
+	_rotatingComponent->RotationRate.Yaw = _rotationSpeed;
+	EnableRotatingMovementComponent(true);
+
+	_timer += GetWorld()->GetDeltaSeconds();
+
+	float distance = FVector::Dist(GetActorLocation(), _player->_rightHandAxe->GetComponentLocation());
+	
+	if (distance < 5.0f) 
+	{
+		_player->MakeHandAxeAppearDisappear(false);
+		_player->_bCallAxe = false;
+		_player->_bIsArmed = true;
+		_player->_bHaveAxe = true;
+
+		GetWorldTimerManager().ClearTimer(_timerHandle);
+		SelfDestroy();
+	}
+}
+
+void AAxe::SelfDestroy()
+{
+	this->Destroy();
+}
+
 void AAxe::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+    Super::Tick(DeltaTime);
 }
