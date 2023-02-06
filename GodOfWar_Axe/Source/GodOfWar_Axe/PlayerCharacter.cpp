@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/SphereComponent.h"
+#include "Camera/CameraShakeBase.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -33,6 +34,13 @@ void APlayerCharacter::SpawnAxe()
 		APlayerController* playerController = Cast<APlayerController>(Controller);
 		GetWorld()->SpawnActor<AAxe>(_axe, _rightHandAxe->GetComponentLocation(), FRotator(-playerController->PlayerCameraManager->GetCameraRotation().Pitch, _rightHandAxe->GetComponentRotation().Yaw, _rightHandAxe->GetComponentRotation().Roll));
 	}
+}
+
+void APlayerCharacter::PlayCameraShake()
+{
+	if (_cameraShake == nullptr) return;
+
+	GetWorldTimerManager().SetTimer(_timerHandle, this, &APlayerCharacter::PlayCameraShake_TimerMethod, 0.01f, true, 0.01f);
 }
 
 void APlayerCharacter::BeginPlay()
@@ -204,12 +212,24 @@ void APlayerCharacter::ShowPlayerStatusInScreen()
 	GEngine->AddOnScreenDebugMessage(-1, 0.001f, _bCallAxe ? FColor::Green : FColor::Red, TEXT("> Call axe"));
 }
 
+void APlayerCharacter::PlayCameraShake_TimerMethod()
+{
+	if (_cameraShake == nullptr) return;
+
+	_timer -= GetWorld()->GetDeltaSeconds();
+
+	APlayerController* playerController = Cast<APlayerController>(Controller);
+	playerController->ClientStartCameraShake(_cameraShake, 1.5f, ECameraShakePlaySpace::CameraLocal, FRotator(0.0f, 0.0f, 0.0f));
+
+	if (_timer < 0.0f) GetWorldTimerManager().ClearTimer(_timerHandle);
+}
+
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 	ShowPlayerStatusInScreen();
-	MoveCameraWhenIsPointing(DeltaTime);	
+	MoveCameraWhenIsPointing(DeltaTime);
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

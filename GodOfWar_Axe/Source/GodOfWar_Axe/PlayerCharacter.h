@@ -29,6 +29,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _disarmAxeAnimMontage;
 	UPROPERTY(EditAnywhere, Category = "Animation Montages") UAnimMontage* _throwAxeAnimMontage;
 
+	UPROPERTY(EditAnywhere, Category = "Camera Shake Animation") TSubclassOf<class UCameraShakeBase> _cameraShake;
+ 
 	UPROPERTY(EditAnywhere, Category = "Axe") TSubclassOf<class AAxe> _axe;
 
 	UPROPERTY(EditAnywhere, Category = "Point Options") float _initialTargetArmLenght = 100.0f;
@@ -52,10 +54,15 @@ public:
 	UFUNCTION(BlueprintCallable) void MakeHandAxeAppearDisappear(bool bMakeDisappear);
 	UFUNCTION(BlueprintCallable) void SpawnAxe();
 
+	void PlayCameraShake();
+
 protected:
 	virtual void BeginPlay() override;
 
 private:
+
+	float _timer = 0.4f;
+	FTimerHandle _timerHandle;
 
 	void MoveForward(float axisValue);
 	void MoveRight(float axisValue);
@@ -78,4 +85,6 @@ private:
 	void SetComponents();
 
 	void ShowPlayerStatusInScreen();
+
+	void PlayCameraShake_TimerMethod();
 };

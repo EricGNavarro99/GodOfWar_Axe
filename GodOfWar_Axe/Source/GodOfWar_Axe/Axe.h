@@ -27,7 +27,6 @@ public:
 	UPROPERTY (EditAnywhere, Category = "Axe Options", meta = (ClampMin = 0.0f, ClampMax = 5000.0f)) float _movementSpeed = 2500.0f;
 	
 	void ReturnAxeToPlayer();
-	FTimerHandle _timerHandle;
 
 protected:
 	virtual void BeginPlay() override;
@@ -50,6 +49,7 @@ private:
 	FVector _axeStickedLocation = FVector(0.0f, 0.0f, 0.0f);
 
 	float _timer = 0.0f;
+	FTimerHandle _timerHandle;
 	void ReturnAxeToPlayer_TimerMethod();
 
 	void SelfDestroy();

@@ -132,9 +132,8 @@ FHitResult AAxe::HitSurface()
 void AAxe::ReturnAxeToPlayer()
 {
 	_axeStickedLocation = GetActorLocation();
-	SetActorRotation(_player->_rightHandAxe->GetComponentRotation());
 
-	GetWorldTimerManager().SetTimer(_timerHandle, this, &AAxe::ReturnAxeToPlayer_TimerMethod, 0.01f, true, 0.0f);
+	GetWorldTimerManager().SetTimer(_timerHandle, this, &AAxe::ReturnAxeToPlayer_TimerMethod, 0.01f, true, 0.01f);
 }
 
 FVector AAxe::CreateBQCurve(float time, FVector axeStickedLocation, FVector playerCurvePoint, FVector axeHandLocation)
@@ -145,17 +144,23 @@ FVector AAxe::CreateBQCurve(float time, FVector axeStickedLocation, FVector play
 void AAxe::ReturnAxeToPlayer_TimerMethod()
 {
 	SetActorLocation(CreateBQCurve(_timer, _axeStickedLocation, _player->_curvePoint->GetComponentLocation(), _player->_rightHandAxe->GetComponentLocation()));
-
-	_rotatingComponent->RotationRate.Yaw = _rotationSpeed;
-	EnableRotatingMovementComponent(true);
-
 	_timer += GetWorld()->GetDeltaSeconds();
 
 	float distance = FVector::Dist(GetActorLocation(), _player->_rightHandAxe->GetComponentLocation());
-	
-	if (distance < 5.0f) 
+
+	if (distance > 30.0f)
+	{
+		_rotatingComponent->RotationRate.Yaw = _rotationSpeed / 2.0f;
+		EnableRotatingMovementComponent(true);
+	}
+	else if (distance > 10.0f && distance < 30.0f)
+	{
+		SetActorRotation(_player->_rightHandAxe->GetComponentRotation());
+	}
+	else if (distance < 5.0f)
 	{
 		_player->MakeHandAxeAppearDisappear(false);
+		_player->PlayCameraShake();
 		_player->_bCallAxe = false;
 		_player->_bIsArmed = true;
 		_player->_bHaveAxe = true;
