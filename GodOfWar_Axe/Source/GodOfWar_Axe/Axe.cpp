@@ -8,6 +8,7 @@
 #include "Components/ArrowComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "GameFramework/RotatingMovementComponent.h"
 
@@ -26,6 +27,8 @@ void AAxe::BeginPlay()
 
 	if (_player == nullptr) _player = Cast<APlayerCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCharacter::StaticClass()));
 	if (_playerController == nullptr) _playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	UseParticles(true);
 	
 	EnableProjectileMovementComponent(true);
 	EnableRotatingMovementComponent(true);
@@ -39,6 +42,7 @@ void AAxe::SetComponents()
 	_arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
 	_staticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	_trigger = CreateDefaultSubobject<USphereComponent>(TEXT("Trigger"));
+	_particles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles"));
 	_projectileComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComponent"));
 	_rotatingComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingComponent"));
 
@@ -46,6 +50,7 @@ void AAxe::SetComponents()
 	_arrow->SetupAttachment(_root);
 	_staticMesh->SetupAttachment(_arrow);
 	_trigger->SetupAttachment(_arrow);
+	_particles->SetupAttachment(_staticMesh);
 
 	_arrow->ArrowSize = -0.05f;
 	_staticMesh->SetWorldLocation(FVector(0.0f, -25.0f, 0.0f));
@@ -57,6 +62,12 @@ void AAxe::SetComponents()
 	_projectileComponent->InitialSpeed = _movementSpeed;
 	_projectileComponent->MaxSpeed = _movementSpeed + 500.0f;
 	_rotatingComponent->RotationRate.Yaw = -_rotationSpeed;
+}
+
+void AAxe::UseParticles(bool bUseParticles)
+{
+	if (bUseParticles) _particles->BeginTrails(FName("Trail_1"), FName("Trail_2"), ETrailWidthMode::ETrailWidthMode_FromFirst, 1.0f);
+	else _particles->EndTrails();
 }
 
 void AAxe::EnableProjectileMovementComponent(bool bEnable)
@@ -77,6 +88,8 @@ void AAxe::StickAxe(UPrimitiveComponent* overlappedComponent, AActor* otherActor
 {
 	EnableProjectileMovementComponent(false);
 	EnableRotatingMovementComponent(false);
+
+	UseParticles(false);
 
 	RelocateStickedAxe();
 
@@ -133,6 +146,8 @@ void AAxe::ReturnAxeToPlayer()
 {
 	_axeStickedLocation = GetActorLocation();
 
+	UseParticles(true);
+
 	GetWorldTimerManager().SetTimer(_timerHandle, this, &AAxe::ReturnAxeToPlayer_TimerMethod, 0.01f, true, 0.01f);
 }
 
@@ -164,6 +179,8 @@ void AAxe::ReturnAxeToPlayer_TimerMethod()
 		_player->_bCallAxe = false;
 		_player->_bIsArmed = true;
 		_player->_bHaveAxe = true;
+
+		UseParticles(false);
 
 		GetWorldTimerManager().ClearTimer(_timerHandle);
 		SelfDestroy();

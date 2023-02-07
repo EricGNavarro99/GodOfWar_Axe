@@ -19,6 +19,7 @@ public:
 	UPROPERTY (VisibleAnywhere) class UArrowComponent* _arrow;
 	UPROPERTY (VisibleAnywhere) class UStaticMeshComponent* _staticMesh;
 	UPROPERTY (VisibleAnywhere) class USphereComponent* _trigger;
+	UPROPERTY (VisibleAnywhere) class UParticleSystemComponent* _particles;
  
 	UPROPERTY (VisibleAnywhere) class UProjectileMovementComponent* _projectileComponent;
 	UPROPERTY (VisibleAnywhere) class URotatingMovementComponent* _rotatingComponent;
@@ -33,6 +34,9 @@ protected:
 
 private:
 	void SetComponents();
+
+	void UseParticles(bool bUseParticles);
+
 	void EnableProjectileMovementComponent(bool bEnable);
 	void EnableRotatingMovementComponent(bool bEnable);
 
